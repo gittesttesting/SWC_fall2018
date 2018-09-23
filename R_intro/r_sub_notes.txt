@@ -1,0 +1,762 @@
+## https://www.dropbox.com/s/dzcfgdofn1v1i5j/R_subsetting.R?dl=0
+
+## DATA FRAME:
+
+menuItems <- c("chicken", "soup","salad","tea")
+menuType <- factor(c("solid","liquid","solid","liquid"))
+menuCost <- c(4.99,2.99,3.29,1.89)
+myOrder_df <- data.frame(menuItems,menuType,menuCost)
+myOrder_df
+
+## SUBSETTING
+## Type 1: Positional Index:
+
+v <- c(1:10)
+v[2]
+v[c(3:6)]
+v[-c(3:6)]
+v[3:6]
+
+myOrder_df[1]
+myOrder_df[[1]]
+typeof(myOrder_df[1])
+typeof(myOrder_df[[1]])
+
+## data_frame[row,column]
+myOrder_df[1:3,]
+
+
+## Subset by Name:
+
+myOrder_df$menuItems
+myOrder_df$menuItems
+
+## Subset by logical vectors:
+
+#####
+# > - greater than
+
+# < - less than
+# == - equal to
+# >= - greater than or equal to
+# <= = less than or equal to
+
+v <- c(5,1,3,4,5)
+v[v==5]
+v==5
+myOrder_df
+df1 <- myOrder_df[myOrder_df$menuType=="solid",]
+df1
+
+df2 <- myOrder_df[myOrder_df$menuCost>3,]
+df2
+
+df3 <- myOrder_df[myOrder_df$menuType=="solid"]
+df3
+
+## GapMinder Dataset
+
+myData <- read.table("Data/gapminder.txt", header=TRUE)
+ 
+## For csv files use read.csv()
+str(myData)
+#3. myData[,c(3,5)]
+#4. unique(myData$V1)
+#6. myData[myData$lifeExp<70,]
+#7. myData$PopM <- myData$pop/(10^6)
+
+
+# myData[myData$lifeExp<70,myData$continent=="Africa"]
+
+############################################
+
+###### Plot Life Expectancy of Canada #######
+
+###########################################
+
+# PlotLifeExp.R script
+
+myDataFull <- read.table("Data/gapminder.txt",header=TRUE)
+
+# Subset Canada only
+Canada <- myDataFull[myDataFull$country=="Canada",]
+
+#Save the graph
+png("Canada.png") # Open Canada.png file
+
+#Plot
+plot(Canada$year,Canada$lifeExp, col="blue",type="l")
+
+# Close Device. 
+dev.off()
+
+
+
+
+****************************************
+Welcome to Software Carpentry Etherpad!
+
+This pad is synchronized as you type, so that everyone viewing this page sees the same text. This allows you to collaborate seamlessly on documents.
+
+Use of this service is restricted to members of the Software Carpentry and Data Carpentry community; this is not for general purpose use (for that, try etherpad.wikimedia.org).
+
+Users are expected to follow our code of conduct: https://docs.carpentries.org/topic_folders/policies/code-of-conduct.html
+
+All content is publicly available under the Creative Commons Attribution License: https://creativecommons.org/licenses/by/4.0/
+
+###########################################
+
+Welcome to Software Carpentry Workshop!
+
+####
+
+Enternet connection info for off-campus guests
+
+Name: evt-carp
+Password: Fall2018
+
+####
+
+Off-campus guests: Register your vehicle!
+
+https://uta.nupark.com/events/Events/Register/d052ae52-85e0-4106-a96a-f5a64986099a
+
+####
+
+Workshop website: https://annawilliford.github.io/2018-09-22-UTA
+
+This etherpad: https://pad.carpentries.org/2018-09-22-UTA
+
+
+####
+Check Software Installation.  See instructions under  SETUP section on the workshop website  https://annawilliford.github.io/2018-09-22-UTA
+
+    * Git Bash
+    * Notepad/TextWrangler
+    * R from the command promt, RStudio
+
+Bash:  open gitbash terminal, type `bash --version`. You should get an output indicating the version of bash shell
+
+Text Editor: open terminal, type `npp new.txt` if using notepad++; type `edit new.txt` if using Text Wrangler
+
+Git: open gitbash terminal, type `git --version`. You should get an output indicating the version of git
+
+R: open gitbash terminal, type `R --version`. You should get an output indicating the version of R
+
+RStudio: open application, should see 3 or 4 windows. 
+
+####
+This is a hands-on experience with computational tools. Our instructors are teaching with live coding, you are expected to follow along.
+
+If you are falling behind,  we have 2 mechanisms to prevent this:
+     
+1. Sticky notes (red - "need help/wait"; greeen - "got it/go on").  Helpers will come to you. 
+
+2. Etherpad http://pad.software-carpentry.org/2018-09-22-UTA \
+    A place to add links, ask questions, add comments as we go. Helpers will answer your questionis.s.
+    
+We appreciate your feedback!
+At the end of every lesson, please peovide feedback on your sticky notes:
+          red - write down one most confusing concept of the lesson
+          green - write down one concept that was very clearly explained
+
+####
+Link to dataset for the workshop
+https://raw.githubusercontent.com/AnnaWilliford/2017-11-11-UTA/gh-pages/workshop/SWC_fall2017/Data.zip
+https://raw.githubusercontent.com/AnnaWilliford/2017-11-11-UTA/gh-pages/workshop/SWC_fall2017/Data.zip 
+*****************************
+Challenege 2.1
+Create these variables
+mass <- 47.5
+age <-122
+height <- 150
+
+What outputs do these give you?
+mass <- mass  * 2.3 = 109.25
+age <- age -20 =102
+height <- height + 20 =170
+> mass*2.3
+[1] 109.25
+> age-20
+[1] 102
+> height+20
+[1] 170
+
+> is.logical(is.numeric(typeof(is.integer(score))))
+[1] TRUE
+
+> myorder
+[[1]]
+[1] "chicken, soup, salad, tea"
+
+[[2]]
+[1] liquid solid 
+Levels: liquid solid
+
+[[3]]
+[1] 4.99 2.99 3.29
+
+
+
+#### CHALLENGE 2.2 #####
+**Challenge 2.2:** Learn how to read the output of nested help functions```TASK: Break the following expression into multiple single function calls.You will need to assign the output of each function to a variable thatwill serve as an input(argument) for the next function. What is the value of each variable? What does each function do? Assign: `score<-79`is.logical(is.numeric(typeof(is.integer(score))))```
+
+
+**CHALLENGE 2.3**         ```    
+TASK: Try to create a list named 'myorder' that contains  the   following data structures as list elements:    
+    -- Element 1 is a character vector of length 4 that  lists the menu items you ordered from the restaurant:     chicken, soup, salad, tea. 
+       -- Element 2 is a factor that describes the types of menu items    as "liquid" or "solid" categories. 
+          -- Element 3 is a vector that records the cost of each menu item:    4.99, 2.99, 3.29, 1.89.   
+           *Hint: Define your elements first, then create a list with them. 
+              You will need c(), factor() and list() functions    ```
+el1<-(c("Chicken","Soup","Salad","Tea"))
+el1
+el2<-factor(c("solid","liquid","solid","liquid"))
+el2
+el3<-c(4.99,2.99,3.29,1.89)
+el3
+myorder<-list(el1,el2,el3)
+ **CHALLENGE 2.2: Answer**        > ```    
+ > menuItems<-c("chicken", "soup", "salad", "tea")    
+ > menuType<-factor(c("solid", "liquid", "solid", "liquid")) 
+    > menuCost<-c(4.99, 2.99, 3.29, 1.89)   
+     > myorder<-list(menuItems, menuType, menuCost)    > ```
+
+Link to R_intro.R:
+    https://www.dropbox.com/s/0vt4xtl4vc13p93/R_intro.R?dl=0
+
+#### DATAFRAME and SUBSETTING
+
+https://www.dropbox.com/s/dzcfgdofn1v1i5j/R_subsetting.R?dl=0
+
+## Challenge 1
+
+TASK: Answer the following questions about `myData` object
+1. What is overall object structure? What function will you use?
+
+2. Can you tell the data type of the elements in each column?
+
+3. Can you extract 3rd and 5th column of the dataset?
+4. Can you extract the list of countries in this dataset?
+### Hint: use unique(). ###
+5. Can you get a part of this dataset that includes information about Sweden?
+6. Can you extract all countries for which life expectancy is below 70?
+7. Can you make a new column that contains population in units of millions of people?
+
+## Challenge 2
+
+Write a script to calculate mean gdpPerCap for African and European countries.
+Try to make a barplot to display your results.
+
+You might need to read help for 'mean' and 'barplot' functions
+?mean
+?barplot
+
+
+
+#############LINUX SHELL###############
+
+#Dropboxlink
+https://www.dropbox.com/s/jmitb63cc94v40w/History.txt?dl=0
+
+
+
+
+
+echo "cut -f1,3,4 Data/gapminder.txt | grep 2002 | sort -n -k3 | tail -n 1 > CountryHighestLifeExp.txt" > MyFirstScript.sh
+We have just created MyFirstScript.sh. Let’s view and modify it slightly: npp MyFirstScript.sh or edit MyFirstScript.sh (if you are on mac)
+Add path to shell (bash in our case) that will execute your code; should be your first line: #!/bin/bash
+Add description of what script does.
+Add usage statement: #usage: script.sh
+Let’s run it. But first look at it carefully, do you think it will run?
+`#./ indicates that you are running script from working directory
+./MyFirstScript.sh`
+Well, it runs and generates the expected output. But is it a good script? Could you reuse it with a different file as input file? How can we make it more flexible?
+To make it flexible we need to inroduce a variable for a part of the code that we want to change frequently. For example, if we want to run this code with a different file, we want a variable instead of hard-wired filename; a variable can take any user-defined value.
+Variables in bash
+Varible name: myName; value assigned to it: Your Name
+
+
+
+
+#try this
+$ myName=Joe  #variable assignment
+$ echo Joe  
+$ echo myName
+$ echo $myName  # need `$` to get the value of the variable
+Let’s modify MyFirstScript.sh to include a variable and save it as MyFirstScript_2.sh Also change the name of the output file to CountryHighestLifeExp_2.txt so that we can be sure that the output corresponds to this new modified script.
+Here is MyFirstScript_2.sh
+
+
+
+
+
+
+
+#!/bin/bash
+
+#record a country with highest LifeExp among countries in OECD_Countries_Full.txt
+#usage: script.sh
+
+input=Data/gapminder.txt
+
+cut -f1,3,4 $input | grep 2002 | sort -n -k3 | tail -n 1 > CountryHighestLifeExp_2.txt
+Run it: sh MyFirstScript_2.sh
+Is it better? A little bit… why? What would be even better? We want to provide filename at the command line and not have to change the script itself.
+Passing command-line arguments to shell scripts
+Here is MyFirstScript_3.sh
+
+
+
+
+
+
+
+#!/bin/bash
+
+#record a country with highest LifeExp among countries in gapminder.txt
+#usage: script.sh $inputFile   #notice how we need to run this now
+
+input=$1  #special variable that stores the the first argument from the command line
+
+cut -f1,3,4 $input | grep 2002 | sort -n -k3 | tail -n 1 > CountryHighestLifeExp_3.txt
+Run it: sh MyFirstScript_3.sh Data/gapminder.txt
+Is it better? Why? Can we make it even better? How?
+CHALLANGE 5
+Work in groups to write a script (name it MyFirstScript_Good.sh) that would allow user to compare any indices between the countries (not just lifeExp), use data for any year (not just 2002) and write the output to a user-defined output file.
+Solution:
+Here is MyFirstScript_Good.sh
+
+
+
+
+
+
+
+
+
+
+#!/bin/bash
+
+#usage: script.sh $inputFile $index $year $outFile   #notice how we need to run this now
+
+input=$1              #special variable that stores the the first argument from the command line
+columns=$2            # $2, $3, $4 store values from 2-4 command line arguments
+year=$3
+out=$4
+
+cut -f1,3,$columns $input | grep $year | sort -n -k3 | tail -n 1 > $out
+
+Now if we want to find out what country had largest population in 1982 we can run our script like this:
+Run it: ./MyFirstScript_Good.sh Data/gapminder.txt 5 1982 LargestPop1982.txt
+This is much better!
+Working with multiple files
+Now let’s see how we can use loops to run the same command on multiple files.
+
+
+
+
+
+
+
+
+
+
+# For example, we want to `cat` each file but don't want to enter the filename each time
+$ cat MyFirstScript_2.sh
+$ cat MyFirstScript_3.sh
+
+# Instead, we can use loops to rerun a command on multiple files
+$ for filename in MyFirstScript_2.sh MyFirstScript_3.sh; do cat $filename; done
+
+# We can generalize this to:
+$ for filename in MyFirstScript_*.sh; do cat $filename; done
+
+#Note: `*` is a wildcard - it matches 0 or more characters. In our example, MyFirstScript_*.sh will match MyFirstScript_2.sh and MyFirstScript_3.sh
+CHALLANGE 6
+Write a script to select a year with the highest life expectancy for one file in Data/ByCountry and then use for loop to run script for each file and record output to a single file.
+Notes: 1) First, look at one of the files in ByCountry folder. Other files have exactly same format, but each files contains information about a different country.
+2) To append output to file, use >> operator
+Solution:
+This is GetYearHighestLifeExp.sh
+#!/bin/bash
+
+#record a year with highest Life Expectancy from every file in Data/ByCountry files and write results to a single file
+
+#usage: script.sh $inputFile  $outFile  
+
+input=$1              
+out=$2
+
+sort -n -k4 $input|tail -n 1|cut -f1,3,4 >> $out
+To run:
+for file in Data/ByCountry/*; do ./GetYearHighestLifeExp.sh $file Results.txt; done
+You have seen how we can run shell scripts from the command line. But remember that the shell is the environment for running any scripts/programs. We can just as easily run R script we wrote this morning.
+
+#to run from command line
+$ Rscript PlotLifeExp.R
+Transition to next lesson
+You have seen how we can use Linux environment to run bash and R scripts. You can run scripts written in any programming language in a similar way. And you also can run R (or any other)scripts from within shell scripts! Such combination of Linux commands with R scripts can be very effective. We will see the example of this tomorrow after we learn more about R programming.
+SWC_Fall2018_Lesson2_final
+Linux environment
+Linux part 2
+Lesson overview
+2c. Bash: manipulate text files
+2d. Bash: write shell scripts
+
+
+#highest life expectancy for 2002
+
+dt <- read.table("Data/gapminder.txt",header = TRUE)
+
+dt
+max(dt$lifeExp)
+dt[dt$lifeExp==82.603,]
+
+
+09/23
+setwd("~/Desktop/SWC_fall2018")
+
+x<-sqrt(64)
+x
+
+fahr_to_Kelvin <- function(temp){ #function
+  kelvin<-((temp-32)*(5/9))+273.15
+  kelvin
+}
+
+fahr_to_Kelvin(32)
+
+print(paste('Boiling point of water:',fahr_to_Kelvin(212))) #paste - concatenate string
+
+fence<-function(original,wrap){
+  ans<-paste0(wrap,original,wrap)
+  return (ans)
+ }
+print(fence('Original','******')) 
+#paste0 - strips blank spaces
+
+#select the column for gdp from albaniadata
+albgdp<-albdata$gdpPercap
+
+# compute the avg gdp for the country over the years
+albavggdp <- mean(albgdp)
+
+print(paste('The average gdp for Albania is :' ,albavggdp))
+
+#clear old vars
+rm(list=ls())
+
+getavggdppercapita <- function(country,gm){
+  #select the country from the given dset
+  countrydata<-gm[gm$country==country,"gdpPercap"]  
+  # compute the mean from it
+  mean(countrydata)
+}
+
+gdpusa <-getavggdppercapita("United_States",gm)
+gdpcanada <-getavggdppercapita("Canada",gm)
+gdpmexico<-getavggdppercapita("Mexico",gm)
+
+print (paste('GDP per cap of USA is',gdpusa))
+print (paste('GDP per cap of Canada is',gdpcanada))
+print (paste('GDP per cap of Mexico is',gdpmexico))
+
+NaN will be returned = if any logical error say typo in col name
+
+
+ggplot2 - 
+produce statistical graphics R package
+springer books - grammar of graphics
+
+data : in ggplot2, data must be stored as an R data frame
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+print("wow")
+#Building blovks of R
+
+#Variable/objects
+#operator <- 
+
+name <- "Jane"
+name
+print(name)
+price <- 3.99
+price
+
+#list of objects
+ls()
+#remove objects
+rm(price)
+#remove all objects
+rm(list=ls())
+
+#Functions
+mass <- 64 #variable mass
+mass
+sqrt(mass) #function with the variable as an argument provided
+res <- sqrt(mass)
+res
+#getwd()function
+getwd()
+
+#using the help tab
+?plot
+help("mean")
+
+#******challenge 2.1****
+mass <- 47.5
+age <- 122
+
+#additional packages
+install.packages("knitr")
+library(knitr)
+
+####Data types and Data Structures
+
+#Single-element data structures: smallest units in R
+age <- 45
+#useful functions to know more about the object
+length(age)
+str(age)
+
+score <- 79
+is.integer(score)
+typeof(score)
+#nested function
+typeof(is.integer(score))
+####Challenge 2.2####
+score <- 79
+#find the output of 
+is.logical(is.numeric(typeof(is.integer(score))))
+# 2 minutes :)
+#congrats!!!!
+step1 <- is.integer(score)
+step1
+step2 <- typeof(step1)
+step2
+step3 <- is.numeric(step2)
+step3
+step4 <- is.logical(step3)
+step4
+
+age
+typeof(age)
+age <- 40L
+typeof(age)
+#Data structure with multiple elements
+#vector: collection of elements of the same data type
+#how to create a vector?
+#c(): concatanate function
+v <- c(1,2,3,45)
+v <- c(1:3, 45
+vv
+v <- c("n:z")
+v
+
+#examine the object
+length(v)
+str(v)
+
+#view parts of data/ vector
+head(v, n=2)
+tail(v, n=3)
+
+#manipulate
+v1 <- 2*v
+v1
+
+#add a vector
+#let's create v2 and then add v2 to v1
+v2 <- c(1:5)
+v2
+v3 <- v1+v2
+v3
+#character vector
+v4 <- c("Jane", "John", "Farah")
+v4
+typeof(v4)
+#change data type
+v3 <- as.character(v3)
+v3
+typeof(v3)
+str(v3)
+#Matrices, factors, list*** challenge
+#Matrices: 2D vectors
+#to create matrices we use the matrix function
+m <- matrix(c(1:18), 3, 6)
+m
+dim(m)
+#factor
+#special vectors used to represent categorical data
+#to create a factor we use a factor function
+continent <- factor(c("Asia", "America", "Europe"))
+continent
+str(continent)
+#Lists: generic vectors- collection of elements 
+#with different data types- numerical and char
+l <- list("Afghanistan", "Albania", 1952, 876897)
+l
+typeof(l)
+str(l)
+
+
+#####Challenge 2.3#####
+#TASK: Try to create a list named 'myorder' 
+#that contains the following data structures as 
+#list elements:    
+
+#Element 1 is a character vector of length 4
+#that  lists the menu items you ordered from the restaurant:
+#chicken, soup, salad, tea. 
+
+#Element 2 is a factor that describes the types of menu items
+#as "liquid" or "solid" categories. 
+
+#Element 3 is a vector that records the cost of each menu item:  
+#4.99, 2.99, 3.29, 1.89.
+
+#*Hint: Define your elements first, then create a list with them. 
+#You will need c(), factor() and list() functions
+menuItems<-c("chicken", "soup", "salad", "tea")  
+menuType<-factor(c("solid", "liquid", "solid", "liquid")) 
+menuCost<-c(4.99, 2.99, 3.29, 1.89)  
+myorder<-list(menuItems, menuType, menuCost)
+#Data frame
+myorder <- list(menuItems,menuType,menuCost)
+myorder_df <- data.frame(menuItems,menuType,menuCost)
+myorder_df
+
+markdowns - reproducible workflows and reports using knitr package
+
+
+
+---
+title: "First Markdown"
+author: "Balan Ramesh"
+date: "9/23/2018"
+output: html_document
+---
+
+ **Bold** - bold with double asterisks  
+ _Italics_ - Italics with Underscores  
+ `r` - Code with backticks  
+
+# Title
+## Main Section
+### Sub Section
+#### Sub-Sub Section
+
+- Item 1
+- Item 2
+- Item 3
+
+
+1. Item 1
+1. Item 2
+1. Item 3
+ 
+[](https://www.google.com)
+<https://www.google.com>
+
+![Figure 1](../Canada.png)
+
+$E = mc^2$
+
+```{r load_data}
+gapminder <- read.table("../Data/gapminder.txt")
+gapminder
+```
+
+[comment]: This line is a comment
+[//]: This is also a comment
+[]: This is try
+
+```{r ggplot_lifeExp, results='hide'}
+library(ggplot2)
+myDataFull <- read.table("../Data/gapminder.txt",header=TRUE)
+
+# Subset Canada only
+Canada <- myDataFull[myDataFull$country=="Canada",]
+
+my_plot <- ggplot(data = Canada, aes(x=year,y=lifeExp))+geom_line()
+my_plot
+
+```
+
+```{r working_of_knitr, echo=FALSE, results='hide', eval=FALSE, warning=FALSE, fig.height=8, fig.width=8}
+### Run this code in R to see graphic of how
+### your document gets rendered
+par(mar=rep(0, 4), bty="n", cex=1.5)
+plot(0, 0, type="n", xlab="", ylab="", xaxt="n", yaxt="n",
+     xlim=c(0, 100), ylim=c(0, 100))
+xw <- 10
+yh <- 35
+xm <- 12
+ym <- 50
+rect(xm-xw/2, ym-yh/2, xm+xw/2, ym+yh/2, lwd=2)
+text(xm, ym, ".Rmd")
+
+xm <- 50
+ym <- 80
+rect(xm-xw/2, ym-yh/2, xm+xw/2, ym+yh/2, lwd=2)
+text(xm, ym, ".md")
+xm <- 50; ym <- 25
+for(i in c(2, 0, -2))
+    rect(xm-xw/2+i, ym-yh/2+i, xm+xw/2+i, ym+yh/2+i, lwd=2,
+         border="black", col="white")
+text(xm-2, ym-2, "figs/")
+
+xm <- 100-12
+ym <- 50
+rect(xm-xw/2, ym-yh/2, xm+xw/2, ym+yh/2, lwd=2)
+text(xm, ym, ".html")
+
+arrows(22, 50, 38, 50, lwd=2, col="slateblue", len=0.1)
+text((22+38)/2, 60, "knitr", col="darkslateblue", cex=1.3)
+
+arrows(62, 50, 78, 50, lwd=2, col="slateblue", len=0.1)
+text((62+78)/2, 60, "pandoc", col="darkslateblue", cex=1.3)
+```
+
+# In Line code
+
+The average of the class is 44.0673946. `r round(44.0673946, 2)`
+
+
+GIT and GITHUB
+ git - version control system
+ repository 
+ starts with base version and goes on
+
+github - cloud service that hosts repositories.It is a central hub to hold all our local repositories, it has additional functionality that enables efficient colloboration
+git config --global "key" "value
+git status
+git init
+git commit
